@@ -1,5 +1,5 @@
 === Restless ===
-Contributors: Mathias, David
+Contributors: Mathias, David.
 Requires at least: 4.1
 Tested up to: 4.1
 Stable tag: 4.1

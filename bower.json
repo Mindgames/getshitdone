@@ -1,0 +1,29 @@
+{
+  "name": "bower",
+  "version": "0.0.1",
+  "homepage": "https://github.com/Mindgames/restless",
+  "authors": [
+    "Mathias <mathias.asberg@gmail.com>"
+  ],
+  "description": "bower dependencies",
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.1",
+    "font-awesome": "~4.2.0"
+  },
+  "devDependencies": {
+    "bootstrap": "~3.3.1"
+  }
+}

@@ -6,48 +6,90 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
+	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-browser-sync');
 
 	// Grunt plugin task settings 
 	grunt.initConfig({
 
-		// Watch for changes "if that then this"
+		// WATCH TASKS
 		watch: {
 			scripts: {
-				files: ['**/*.less'],
-				tasks: ['less'],
+				files: ['css/less/*.less'],
+				tasks: ['less','cssmin'],
 				options: {
 					spawn: false,
 				},
-			
+
 			},
 
-				scripts2: {
+			scripts2: {
 
-			files: ['**/*.css'],
+				files: ['**/*.css'],
 				tasks: ['cssmin'],
 				options: {
 					spawn: false,
 				},
-					},
+			},
 		},
+
+		copy: {
+			main: {
+				files: [
+					// includes files within path
+					{
+						expand: true,
+						flatten: true,
+						src: ['lib/bootstrap/less/*'],
+						dest: 'css/less',
+						filter: ''
+					}, {
+						expand: true,
+						flatten: true,
+						src: ['lib/bootstrap/less/mixins/*'],
+						dest: 'css/less/mixins',
+						filter: ''
+					},
+
+					// includes files within path and its sub-directories
+					//{expand: true, src: ['path/**'], dest: 'dest/'},
+
+					// makes all src relative to cwd
+					//{expand: true, cwd: 'path/', src: ['**'], dest: 'dest/'},
+
+					// flattens results to a single level
+					//{expand: true, flatten: true, src: ['path/**'], dest: 'dest/', filter: 'isFile'},
+				],
+			},
+		},
+
+		browserSync: {
+    bsFiles: {
+        src : 'css/style.css'
+    },
+    options: {
+   		 proxy: "local.dev",
+      
+    }
+},
 
 
 		// Compiling less 
 		less: {
-			production: {
+			compileCore: {
 				options: {
-					paths: ["assets/css"],
-					plugins: [
-						/*new require('less-plugin-autoprefix')({browsers: ["last 2 versions"]}),
-        new require('less-plugin-clean-css')(cleanCssOptions)*/
-					],
+					strictMath: true,
+					sourceMap: true,
+					outputSourceFiles: true,
+					sourceMapFilename: 'main.css.map', 
+					sourceMapURL: 'main.css.map', 
 
 				},
-				files: {
-					"css/style.css": "css/style.less"
-				}
+				src: 'css/less/config.less',
+				dest: 'css/style.css'
 			}
 		},
+
 
 		cssmin: {
 			target: {
